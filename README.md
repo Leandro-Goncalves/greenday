@@ -7,12 +7,12 @@
 
 # Layout web
 <p align="center">
-  <img src="files/img/web.png"alt="Green Day">
+  <img src="files/img/web-layout.png"alt="Green Day">
 </p>
 
 # Layout mobile
 <p>
-  <img src="files/img/mobile.png" height="340" alt="Green Day" />
+  <img src="files/img/mobile-layout.png" height="340" alt="Green Day" />
 </p>
 
 # 🛠 Tecnologias
