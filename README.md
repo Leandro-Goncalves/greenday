@@ -1,34 +1,110 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+<p align="center">
+  <img src="files/img/logo.svg" height="150" width="175" alt="Green Day" />
+</p>
 
-## Getting Started
+# Sobre o projeto
+  Green day é um projeto que foi criado com o intuito de demonstrar uma tela de login e de cadastro totalmente funcional.
 
-First, run the development server:
+# Layout web
+<p align="center">
+  <img src="files/img/web.png"alt="Green Day">
+</p>
+
+# Layout mobile
+<p>
+  <img src="files/img/mobile.png" height="340" alt="Green Day" />
+</p>
+
+# 🛠 Tecnologias
+As seguintes ferramentas foram usadas na construção do projeto:
+
+### front-end
+
+- [NextJs](https://nextjs.org)
+- [ReactJs](https://pt-br.reactjs.org)
+- [Typescrypt](https://www.typescriptlang.org)
+- [axios](https://www.npmjs.com/package/axios)
+- [email-validator](https://www.npmjs.com/package/email-validator)
+- [framer-motion](https://www.npmjs.com/package/framer-motion)
+- [js-cookie](https://www.npmjs.com/package/js-cookie)
+- [react-lottie](https://www.npmjs.com/package/react-lottie)
+- [rc-slider](https://www.npmjs.com/package/rc-slider)
+- [react-toastify](https://www.npmjs.com/package/react-toastify)
+- [react-responsive-modal](https://www.npmjs.com/package/react-responsive-modal)
+- [input-files](https://www.npmjs.com/package/input-files)
+
+### back-end
+- [bcrypt](https://www.npmjs.com/package/bcrypt)
+- [jsonwebtoken](https://www.npmjs.com/package/jsonwebtoken)
+- [mongodb](https://www.npmjs.com/package/mongodb)
+
+# Animação
+Uma das principais implementações foram as animações de mudança de páginas e de outros elementos:
+
+![gif ](files/gif/web.gif)
+![gif ](files/gif/mobile.gif)
+
+# Back-End
+O back-end foi construído em [Serverless](https://www.serverless.com) seguindo os seguintes caminhos:
+* /api
+  * /signUp - cadastra usuários
+  * /signIn - verifica se o usuario pode logar ou não
+  * /verify - verifica e o e-mail já está em uso
+
+# 🚀 Como executar o projeto
+
+💡 Como o back-end está em Serverless não é necessário executar nenhuma configuração separada para ele.
+
+## Pré-requisitos
+Antes de começar, você vai precisar ter instalado em sua máquina as seguintes ferramentas:
+
+ * [Git](https://git-scm.com)
+ * [Node.js](https://nodejs.org)
+ * [VSCode](https://code.visualstudio.com) ou outro editor de codigos
+
+## 🧭 Rodando a aplicação
+
+⚠️ Quando clonar a aplicação não se esqueça de:
+ - Criar url de conexão para banco de dados em .env
+ - Criar um segredo para o jwt em secrets/jwt.json
 
 ```bash
-npm run dev
-# or
-yarn dev
+# Clone este repositório
+$ git clone https://github.com/Leandro-Goncalves/greenday
+
+# Acesse a pasta do projeto no seu terminal/cmd
+$ cd greenday
+
+# Instale as dependências
+$ npm install
+# ou
+$ yarn
+
+# Execute a aplicação em modo de desenvolvimento
+$ npm run dev
+# ou
+$ yarn dev
+
+# A aplicação será aberta na porta:3000 - acesse http://localhost:3000
 ```
+---
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+# Author
+<a href="https://github.com/Leandro-Goncalves/">
+  <img
+    width="150px"
+    src="files/img/photo.jpeg"
+    alt=""
+  />
+ <br />
+ <sub><b>Leandro Gonçalves</b></sub></a>
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+---
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+## 📝 Licença
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+Este projeto esta sobe a licença [MIT](./LICENSE).
 
-## Learn More
+Feito com ❤️ por Leandro Gonçalves [Entre em contato!](mailto:leandrogoncalvesprofissional@hotmail.com)
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+---

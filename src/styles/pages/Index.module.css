@@ -1,0 +1,38 @@
+.container {
+  min-height: 100vh;
+  padding: 0 0.5rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  font-family: "Jaldi";
+  font-weight: 700;
+  overflow: hidden;
+  padding-right: 114px;
+}
+.wave {
+  width: 120vw;
+  height: 100vh;
+  background: url("/background.svg");
+  background-repeat: no-repeat;
+  background-position: right;
+  filter: drop-shadow(0 0 6px rgba(0, 0, 0, 0.459));
+  position: fixed;
+  left: 0;
+  z-index: 2;
+}
+
+@media (max-width: 720px) {
+  .container {
+    padding-right: 0;
+    justify-content: center;
+    padding: 0;
+    background: url("/background-cellphone.svg");
+    background-repeat: no-repeat;
+    background-position: 110%;
+  }
+  .wave {
+    z-index: -1;
+    opacity: 0;
+  }
+}

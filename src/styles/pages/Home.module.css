@@ -1,0 +1,19 @@
+.container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+  margin-left: 100px;
+}
+.container > img {
+  width: 30vw;
+  max-width: 200px;
+}
+
+.title {
+  font-size: 10vw;
+  font-family: "Jaldi";
+  color: var(--green);
+}

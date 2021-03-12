@@ -1,0 +1,85 @@
+.container {
+  height: 100%;
+  width: 100px;
+  background: linear-gradient(90deg, #01cb93 0%, #01bfcb 150.75%);
+  filter: drop-shadow(4px 0 5px rgba(0, 0, 0, 0.25));
+  transition: width 0.3s ease-out;
+  position: fixed;
+  left: 0;
+}
+
+.container:hover {
+  width: 200px;
+}
+
+.container > ul {
+  margin-top: 30px;
+  list-style: none;
+  color: #ffffff;
+  font-family: "Jaldi";
+  font-weight: bold;
+}
+
+.container li {
+  padding-left: 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  transition: background-color 0.3s ease-out;
+  height: 70px;
+}
+
+.container li > div {
+  transition: all 0.2s ease-out;
+  opacity: 0;
+}
+
+.container:hover li > div {
+  opacity: 1;
+  margin-left: 20px;
+  font-size: 20px;
+}
+
+.container li:hover {
+  background-color: rgba(0, 0, 0, 0.25);
+}
+
+.userContainer {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  height: 120px;
+}
+
+.user {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  margin-bottom: 25px;
+  background-color: #01cb93;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  overflow: hidden;
+  flex-direction: column;
+  transition: all 0.3s ease-out;
+}
+
+.container:hover .user {
+  width: 120px;
+  height: 120px;
+}
+
+.userIcon {
+  width: 60px;
+  transition: width 0.3s ease-out;
+  height: 100px;
+}
+
+.container:hover > div > img {
+  width: 100px;
+}
