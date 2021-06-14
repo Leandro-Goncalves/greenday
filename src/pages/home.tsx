@@ -5,11 +5,17 @@ import { useEffect, useState } from 'react';
 import { LateralBar } from '../components/LateralBar';
 import styles from '../styles/pages/Home.module.css';
 
+type userData = {
+  image: string,
+  rotate: number,
+  zoom: number
+}
+
 export default function Home() {
 
   const router = useRouter();
 
-  const [data, setData] = useState({});
+  const [data, setData] = useState<userData>({} as userData);
 
   function logOut() {
     Cookies.remove("token");

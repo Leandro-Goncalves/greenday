@@ -1,10 +1,15 @@
 import styles from '../styles/components/LateralBar.module.css';
 
-export function LateralBar(props : {data : any, userData: {
-  image: string,
-  rotate: number,
-  zoom: number
-}}) {
+type LateralBarProps = {
+  data: any,
+  userData: {
+    image: string,
+    rotate: number,
+    zoom: number
+  }
+}
+
+export function LateralBar(props : LateralBarProps) {
   return(
     <div className={styles.container}>
       <div className={styles.userContainer}>

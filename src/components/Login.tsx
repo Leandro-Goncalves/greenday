@@ -70,7 +70,7 @@ export function Login(props : {isChangeScreen : (state:boolean)=> void}) {
         animate={{y: 0, opacity: 1}}
       />
 
-      <h2 className={styles.subTitle}>Login</h2>
+      <motion.h2 variants={fadeUp} className={styles.subTitle}>Login</motion.h2>
 
       <motion.div variants={fadeUp} className={styles.input}>
         <div><img src="/icons/user.svg" alt="user"/></div>
@@ -93,7 +93,13 @@ export function Login(props : {isChangeScreen : (state:boolean)=> void}) {
         />
       </motion.div>
 
-      <motion.button variants={fadeUp} whileTap={{scale: 0.9}} onClick={handleSubmit} className={styles.submitButton}>
+      <motion.button
+        variants={fadeUp}
+        whileTap={{scale: 0.9}}
+        onClick={handleSubmit}
+        className={styles.submitButton}
+        whileHover={{scale:0.95}}
+      >
         Login 
         <Loader
           visible={loading}

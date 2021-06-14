@@ -6,7 +6,6 @@ import { SliderBar } from './SliderBar';
 import { useState } from 'react';
 import axios from 'axios';
 
-import InputFiles from 'react-input-files';
 import Cookies from 'js-cookie';
 import { toast } from 'react-toastify';
 import { useRouter } from 'next/router';
@@ -38,14 +37,18 @@ export function AddImageModal(props : {open: boolean, setOpen: any, email:string
   }
 
   const toBase64 = file => new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = () => resolve(reader.result);
-    reader.onerror = error => reject(error);
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = error => reject(error);
   });
 
   async function convertAndSetImage(data){
-    setImage(await toBase64(data[0]));
+    try{
+      setImage(await toBase64(data[0]));
+    } catch(err) {
+      
+    }
   }
 
   return(
@@ -53,8 +56,8 @@ export function AddImageModal(props : {open: boolean, setOpen: any, email:string
       <div className={styles.container}>
         <h1>Select your image</h1>
         <section>
-          <InputFiles accept="image/*" onChange={files => convertAndSetImage(files)} style={{outline:"none"}}>
-            <div className={styles.image}>
+          <input id="input-file" className={styles.input} type="file" accept=".png, .jpg, .jpeg" onChange={files => convertAndSetImage(files.target.files)} style={{outline:"none"}}/>
+          <label htmlFor='input-file' className={styles.image}>
               {image 
                 ?
                 <>
@@ -69,8 +72,7 @@ export function AddImageModal(props : {open: boolean, setOpen: any, email:string
                 </>
               }
               
-            </div>
-          </InputFiles>
+            </label>
 
           <div className={styles.sliderContainer}>
             Zoom

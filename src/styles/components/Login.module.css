@@ -50,6 +50,7 @@
   padding-left: 15%;
   outline: none;
   border: 2px solid transparent;
+  transition: border 0.2s linear; 
 }
 
 .inputItem:focus {
