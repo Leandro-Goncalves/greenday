@@ -19,12 +19,10 @@ export default function Home() {
   },[ChangeScreen])
 
   return (
-    <div className={styles.container}>
+    <div className={styles.container}>  
       <motion.div
-        exit={{ left: 0 }}
         transition={{duration: 1}}
         className={styles.wave}
-        animate={{left: "-90%"}}
       />
       <Login isChangeScreen={useChangeScreen}/>
     </div>

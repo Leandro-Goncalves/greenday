@@ -52,7 +52,7 @@ export function Login(props : {isChangeScreen : (state:boolean)=> void}) {
   }
 
   return(
-    <motion.form variants={stagger} exit={{opacity: 0}} className={styles.container} initial="initial" animate="animate">
+    <motion.form variants={stagger} className={styles.container} initial="initial" animate="animate">
       
       <motion.img
         className={styles.logo}

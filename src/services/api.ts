@@ -12,7 +12,7 @@ export function setupApiClient(ctx = null) {
   let cookies = parseCookies(ctx)
 
   const api = axios.create({
-    baseURL: "https://greenday.vercel.app/api",
+    baseURL: "http://localhost:3000/api",
     headers: {
       Authorization: `Bearer ${cookies['greenday.token']}`
     }
