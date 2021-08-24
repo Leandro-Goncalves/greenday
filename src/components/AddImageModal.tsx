@@ -6,34 +6,65 @@ import { SliderBar } from './SliderBar';
 import { useState } from 'react';
 import axios from 'axios';
 
-import Cookies from 'js-cookie';
+import { setCookie } from 'nookies'
 import { toast } from 'react-toastify';
 import { useRouter } from 'next/router';
+import { useAuth } from '../hook/useAuth';
+import Loader from 'react-loader-spinner';
 
-export function AddImageModal(props : {open: boolean, setOpen: any, email:string, password:string}) {
+type AddImageModalProps =  {
+  open: boolean,
+  setOpen: any,
+  email:string,
+  password:string
+}
 
-  const router = useRouter();
+export function AddImageModal({
+  email,
+  open,
+  password,
+  setOpen
+}:AddImageModalProps) {
+
+  const {
+    signUp
+  } = useAuth();
 
   const [zoom, setZoom] = useState([50]);
   const [rotate, setRotate] = useState([0]);
-
   const [image, setImage] = useState(null);
 
-  async function addUser() {
-    const signUp = await axios.post('/api/signUp', {
-      email:props.email,
-      password: props.password,
-      image,
-      zoom: zoom[0],
-      rotate: rotate[0]
-    });
-    const signUpdData = signUp.data;
-    if(!signUpdData.error){
-      Cookies.set("token",signUpdData.token);
-      router.push("/home")
-    }else{
-      toast.error(signUpdData.errorMessage);
+  const [loading, setLoading] = useState(false);
+  
+
+  async function addUserTest() {
+    try{
+      setLoading(true);
+      const formData = new FormData();
+      formData.append("image", image.split(',')[1]);
+      formData.append('name', email);
+      formData.append('key', process.env.NEXT_PUBLIC_IMGBB_API_KEY);
+
+      const response = await axios.post(
+        'https://api.imgbb.com/1/upload',
+        formData
+      );
+      const {data: imagaData} = response.data
+      if(imagaData.url){
+        await signUp({
+          email,
+          imageUrl: imagaData.url,
+          password: password,
+          rotate: rotate[0],
+          zoom: zoom[0]
+        })
+      }
+
+    } catch (err) {
+      toast.error(err.message)
     }
+    setLoading(false);
+    
   }
 
   const toBase64 = file => new Promise((resolve, reject) => {
@@ -52,7 +83,7 @@ export function AddImageModal(props : {open: boolean, setOpen: any, email:string
   }
 
   return(
-    <Modal open={props.open} onClose={()=>props.setOpen(false)}>
+    <Modal open={open} onClose={()=>setOpen(false)}>
       <div className={styles.container}>
         <h1>Select your image</h1>
         <section>
@@ -81,7 +112,20 @@ export function AddImageModal(props : {open: boolean, setOpen: any, email:string
             <SliderBar range={rotate} changeRange={setRotate} max={360}/>
           </div>
         </section>
-        <button onClick={addUser} disabled={image ? false : true} className={styles.submitButton}>Create</button>
+        <button
+          onClick={addUserTest}
+          disabled={image ? false : true}
+          className={styles.submitButton}
+        >
+          Create
+          <Loader
+            visible={loading}
+            type="TailSpin"
+            color="#FFFFFF"
+            height={30}
+            width={50}
+          />
+        </button>
       </div>
     </Modal>
   )

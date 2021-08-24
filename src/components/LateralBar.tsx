@@ -3,7 +3,7 @@ import styles from '../styles/components/LateralBar.module.css';
 type LateralBarProps = {
   data: any,
   userData: {
-    image: string,
+    imageUrl: string,
     rotate: number,
     zoom: number
   }
@@ -14,9 +14,9 @@ export function LateralBar(props : LateralBarProps) {
     <div className={styles.container}>
       <div className={styles.userContainer}>
         <div className={styles.user}>
-          <img className={props.userData.image === undefined && styles.userIcon} src={props.userData.image || "/userBar.svg"} alt="user"
-          width={`${props.userData.zoom * 10}%`}
-          style={{transform:`rotate(${props.userData.rotate}deg)`}}/>
+          <img className={props.userData?.imageUrl === undefined && styles.userIcon} src={props?.userData?.imageUrl || "/userBar.svg"} alt="user"
+          width={`${props.userData?.zoom * 10}%`}
+          style={{transform:`rotate(${props.userData?.rotate}deg)`}}/>
         </div>
       </div>
       <ul>

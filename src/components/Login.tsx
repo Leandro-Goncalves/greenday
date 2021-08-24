@@ -4,11 +4,12 @@ import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
-import Cookies from 'js-cookie';
+import { setCookie } from 'nookies'
 import { useRouter } from 'next/router'
 import Loader from "react-loader-spinner";
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import { motion } from "framer-motion";
+import { useAuth } from '../hook/useAuth';
 
 const fadeUp = {
   initial: {
@@ -32,7 +33,7 @@ const stagger = {
 
 export function Login(props : {isChangeScreen : (state:boolean)=> void}) {
 
-  const router = useRouter();
+  const { signIn } = useAuth();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -43,14 +44,7 @@ export function Login(props : {isChangeScreen : (state:boolean)=> void}) {
     e.preventDefault();
     if(email.trim() && password.trim()){
       setLoading(true);
-      const signUp = await axios.post('/api/signIn', {email, password});
-      const signUpdData = signUp.data;
-      if(!signUpdData.error){
-        Cookies.set("token",signUpdData.token);
-        router.push("/home");
-      }else{
-        toast.error(signUpdData.errorMessage);
-      }
+      await signIn({email, password})
     }else{
       toast.warning('Empty fields !');
     }

@@ -3,11 +3,8 @@ import { motion } from "framer-motion";
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router'
 
-import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { SignUp } from '../components/signUp';
-import Cookies from 'js-cookie';
-import axios from 'axios';
 
 function Home() {
 
@@ -22,7 +19,6 @@ function Home() {
 
   return (
     <div className={styles.container}>
-      <ToastContainer />
       <motion.div
         exit={{ left: 0 }}
         transition={{duration: 1}}

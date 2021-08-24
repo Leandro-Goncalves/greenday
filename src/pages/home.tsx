@@ -1,60 +1,35 @@
 import axios from 'axios';
-import Cookies from 'js-cookie';
-import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
+import nookies, { destroyCookie } from 'nookies'
+import { GetServerSideProps } from 'next';
 import { LateralBar } from '../components/LateralBar';
 import styles from '../styles/pages/Home.module.css';
+import { useAuth } from '../hook/useAuth';
+import { signOut } from '../context/Authcontext';
+import { WithSSRAuth } from '../utils/WithSSRAuth';
+import { setupApiClient } from '../services/api';
 
-type userData = {
-  image: string,
-  rotate: number,
-  zoom: number
+type User = {
+  email:string,
+  rotate:number,
+  zoom:number,
+  imageUrl:string
 }
 
-export default function Home() {
+export default function Home(props:User) {
 
-  const router = useRouter();
-
-  const [data, setData] = useState<userData>({} as userData);
-
-  function logOut() {
-    Cookies.remove("token");
-    router.push("/")
-  }
-
-  useEffect(()=>{
-    async function verify(){
-      const token = Cookies.get('token');
-      if(token){
-        
-        const verify = await axios.post('/api/verify', {token});
-        
-        if(verify.data.error){
-          router.push("/")
-        }else{
-          setData(
-            {
-              image:verify.data.user.image,
-              rotate:verify.data.user.rotate,
-              zoom:verify.data.user.zoom
-            })
-        }
-      }else{
-        router.push("/")
-      }
-    }
-    verify()
-  },[])
+  const {
+    user
+  } = useAuth();
 
   return(
     <div className={styles.container}>
-      <LateralBar userData={data} data={[
+      <LateralBar userData={props} data={[
         {
           title: "Logout",
           width: 40,
           src: "/logOutBar.svg",
           padding:30,
-          callback: logOut
+          callback: signOut
         }
       ]}/>
       <h1 className={styles.title}>You are logged in </h1>
@@ -62,3 +37,19 @@ export default function Home() {
     </div>
   );
 }
+
+export const getServerSideProps:GetServerSideProps = WithSSRAuth<User>(async (ctx) => {
+
+  const apiClient = setupApiClient(ctx)
+  const response = await apiClient.post("/verify")
+  const {email, rotate, zoom, imageUrl} = response.data.user;
+
+  return {
+    props:{
+      email,
+      rotate,
+      zoom,
+      imageUrl
+    }
+  }
+});

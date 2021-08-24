@@ -6,6 +6,8 @@ import axios from 'axios';
 import Loader from 'react-loader-spinner';
 import { AddImageModal } from './AddImageModal';
 import { motion } from 'framer-motion';
+import * as yup from 'yup';
+import { api } from '../services/api';
 
 const fadeUp = {
   initial: {
@@ -27,6 +29,14 @@ const stagger = {
   }
 }
 
+let schema = yup.object().shape({
+  email: yup.string().email("Email is invalid!").required("Empty fields !"),
+  password: yup.string().required("Empty fields !"),
+  repeatePassword: yup.string().required("Empty fields !")
+  .oneOf([yup.ref('password'), null], 'Passwords do not match !')
+
+});
+
 export function SignUp(props : {isChangeScreen : (state:boolean)=> void}) {
 
   const [email, setEmail] = useState("");
@@ -38,33 +48,24 @@ export function SignUp(props : {isChangeScreen : (state:boolean)=> void}) {
 
   async function handleSubmit(e) {
     e.preventDefault();
-    if(email.trim() && password.trim() && password.trim()){
-      if(password.trim() === repeatePassword.trim()){
-        if(EmailValidator.validate(email.trim())){
-          setLoading(true);
-          const signUp = await axios.post('/api/verify', {email});
-          const signUpdData = signUp.data;
-          if(!signUpdData.error){
-            setOpen(true);
-          }else{
-            if(signUpdData.errorMessage){
-              toast.error(signUpdData.errorMessage);
-            }
-            else {
-              toast.error("Something is wrong");
-            }
-          }
-          setLoading(true);
-        }else{
-          toast.warning('Invalid email !');
-        }
-      }else{
-        toast.warning('Passwords do not match !');
+    schema.validate({
+      email,
+      password,
+      repeatePassword
+    }).then(async ({email}) => {
+      setLoading(true);
+      const checkEmail = await api.post('/CheckEmail', {email});
+      const { error, errorMessage } = checkEmail.data;
+      if(error){
+        toast.error(errorMessage);
+        return
       }
-    }else{
-      toast.warning('Empty fields !');
-    }
-    setLoading(false);
+      setOpen(true);
+      setLoading(false);
+    })
+    .catch((err) => {
+      err.errors.forEach((name: string) => toast.warning(name));
+    })
   }
 
   return(
