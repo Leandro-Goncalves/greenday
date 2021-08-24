@@ -1,13 +1,11 @@
 import styles from '../styles/components/signUp.module.css';
 import { toast } from 'react-toastify';
 import { useState } from 'react';
-import * as EmailValidator from 'email-validator';
-import axios from 'axios';
 import Loader from 'react-loader-spinner';
 import { AddImageModal } from './AddImageModal';
 import { motion } from 'framer-motion';
 import * as yup from 'yup';
-import { api } from '../services/api';
+import { api } from "../services/apiClient";
 
 const fadeUp = {
   initial: {

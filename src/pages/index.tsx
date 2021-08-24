@@ -5,10 +5,7 @@ import { useRouter } from 'next/router'
 
 import 'react-toastify/dist/ReactToastify.css';
 import { Login } from '../components/Login';
-import {verify} from './api/verify';
 import { GetServerSideProps } from 'next';
-import nookies from 'nookies'
-import { useAuth } from '../hook/useAuth';
 import { WithSSRGuest } from '../utils/WithSSRGuest';
 
 export default function Home() {
