@@ -1,9 +1,6 @@
-import axios from 'axios';
-import nookies, { destroyCookie } from 'nookies'
 import { GetServerSideProps } from 'next';
 import { LateralBar } from '../components/LateralBar';
 import styles from '../styles/pages/Home.module.css';
-import { useAuth } from '../hook/useAuth';
 import { signOut } from '../context/Authcontext';
 import { WithSSRAuth } from '../utils/WithSSRAuth';
 import { setupApiClient } from '../services/api';
@@ -16,11 +13,6 @@ type User = {
 }
 
 export default function Home(props:User) {
-
-  const {
-    user
-  } = useAuth();
-
   return(
     <div className={styles.container}>
       <LateralBar userData={props} data={[

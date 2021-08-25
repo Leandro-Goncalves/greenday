@@ -6,9 +6,7 @@ import { SliderBar } from './SliderBar';
 import { useState } from 'react';
 import axios from 'axios';
 
-import { setCookie } from 'nookies'
 import { toast } from 'react-toastify';
-import { useRouter } from 'next/router';
 import { useAuth } from '../hook/useAuth';
 import Loader from 'react-loader-spinner';
 

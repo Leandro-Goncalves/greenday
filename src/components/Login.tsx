@@ -1,11 +1,8 @@
 import styles from '../styles/components/Login.module.css';
-import Link from 'next/link'
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import axios from 'axios';
-import { setCookie } from 'nookies'
-import { useRouter } from 'next/router'
+import Router from 'next/router'
 import Loader from "react-loader-spinner";
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import { motion } from "framer-motion";
@@ -31,14 +28,17 @@ const stagger = {
   }
 }
 
-export function Login(props : {isChangeScreen : (state:boolean)=> void}) {
+export function Login() {
 
   const { signIn } = useAuth();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
   const [loading, setLoading] = useState(false);
+
+  function ChangeScreen() {
+    Router.push("/signUp")
+  }
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -103,7 +103,7 @@ export function Login(props : {isChangeScreen : (state:boolean)=> void}) {
           width={50}
         />
       </motion.button>
-      <motion.div variants={fadeUp} onClick={()=>{props.isChangeScreen(true)}} className={styles.link}>create new account</motion.div>
+      <motion.div variants={fadeUp} onClick={ChangeScreen} className={styles.link}>create new account</motion.div>
     </motion.form>
   )
 }

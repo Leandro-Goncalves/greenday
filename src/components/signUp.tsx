@@ -6,6 +6,7 @@ import { AddImageModal } from './AddImageModal';
 import { motion } from 'framer-motion';
 import * as yup from 'yup';
 import { api } from "../services/apiClient";
+import Router from 'next/router';
 
 const fadeUp = {
   initial: {
@@ -35,7 +36,7 @@ let schema = yup.object().shape({
 
 });
 
-export function SignUp(props : {isChangeScreen : (state:boolean)=> void}) {
+export function SignUp() {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -43,6 +44,11 @@ export function SignUp(props : {isChangeScreen : (state:boolean)=> void}) {
 
   const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState(false);
+
+  
+  function ChangeScreen() {
+    Router.push("/")
+  }
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -130,7 +136,7 @@ export function SignUp(props : {isChangeScreen : (state:boolean)=> void}) {
           width={50}
         />
       </motion.button>
-      <motion.div variants={fadeUp} onClick={()=>{props.isChangeScreen(true)}} className={styles.link}>Login</motion.div>
+      <motion.div variants={fadeUp} onClick={ChangeScreen} className={styles.link}>Login</motion.div>
     </motion.form>
   )
 }
